@@ -33,7 +33,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 button,
-a  {
+a {
 	font-family: "SF Pro Display", SF Pro Icons, Helvetica Neue, Helvetica, Arial,
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -339,7 +339,7 @@ nav .link-styled {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	opacity: 0;
+	opacity: 1;
 }
 
 .sound-section .title {
