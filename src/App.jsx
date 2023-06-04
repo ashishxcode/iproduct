@@ -1,11 +1,11 @@
-
-function App() {
-
-  return (
-    <div className="App">
-      Hello
-    </div>
-  );
-}
+import React from "react";
+import Navbar from "./components/Navbar";
+const App = () => {
+	return (
+		<div id="App">
+			<Navbar />
+		</div>
+	);
+};
 
 export default App;
