@@ -32,6 +32,15 @@ body::-webkit-scrollbar-thumb {
 	background-color: #555;
 }
 
+button,
+a  {
+	font-family: "SF Pro Display", SF Pro Icons, Helvetica Neue, Helvetica, Arial,
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	border: none;
+}
+
 .App #content {
 	transition-duration: 0.3s;
 }
@@ -70,6 +79,7 @@ body::-webkit-scrollbar-thumb {
 	position: absolute;
 	top: 30px;
 	border: none;
+	outline: none;
 	z-index: 1;
 	transition-duration: 0.3s;
 }
