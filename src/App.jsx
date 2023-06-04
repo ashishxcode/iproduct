@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Jumbotron from "./components/Jumbotron";
 import SoundFeature from "./components/SoundFeature";
 import DisplaySection from "./components/DisplaySection";
+import WebGIViewer from "./components/WebGIViewer";
 const App = () => {
 	return (
 		<div id="App">
@@ -10,6 +11,7 @@ const App = () => {
 			<Jumbotron />
 			<SoundFeature />
 			<DisplaySection />
+			<WebGIViewer />
 		</div>
 	);
 };
