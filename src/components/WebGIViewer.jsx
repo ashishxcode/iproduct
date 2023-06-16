@@ -30,6 +30,7 @@ const WebGIViewer = forwardRef((props, ref) => {
 	const [camera, setCamera] = useState(null);
 	const [position, setPosition] = useState(null);
 	const [previewMode, setPreviewMode] = useState(false);
+	const [isMobile, setIsMobile] = useState(false);
 
 	const canvasRef = useRef(null);
 	const canvasContainerRef = useRef(null);
@@ -62,15 +63,19 @@ const WebGIViewer = forwardRef((props, ref) => {
 			});
 		},
 	}));
-	const memorizedScrollAnimation = useCallback((position, target, onUpdate) => {
-		if (position && target && onUpdate) {
-			scrollAnimation({
-				position,
-				target,
-				onUpdate,
-			});
-		}
-	}, []);
+	const memorizedScrollAnimation = useCallback(
+		(position, target, isMobile, onUpdate) => {
+			if (position && target && onUpdate) {
+				scrollAnimation({
+					position,
+					target,
+					isMobile,
+					onUpdate,
+				});
+			}
+		},
+		[]
+	);
 
 	const setupViewer = useCallback(async () => {
 		// Initialize the viewer
@@ -80,6 +85,10 @@ const WebGIViewer = forwardRef((props, ref) => {
 
 		// Set the viewer to the state
 		setViewer(viewer);
+
+		const isMobileOrTablet = mobileAndTabletCheck();
+
+		setIsMobile(isMobileOrTablet);
 
 		// Add some plugins
 		const manager = await viewer.addPlugin(AssetManagerPlugin);
@@ -112,6 +121,12 @@ const WebGIViewer = forwardRef((props, ref) => {
 			controlsEnabled: false,
 		});
 
+		if (isMobileOrTablet) {
+			position.set(-16.7, 1.17, 11.7);
+			target.set(0, 1.37, 0);
+			props.contentRef.current.className = 'mobile-or-tablet';
+		}
+
 		window.scrollTo(0, 0);
 
 		let needsUpdate = true;
@@ -126,7 +141,7 @@ const WebGIViewer = forwardRef((props, ref) => {
 			}
 		});
 
-		memorizedScrollAnimation(position, target, onUpdate);
+		memorizedScrollAnimation(position, target, isMobile, onUpdate);
 	}, []);
 
 	useEffect(() => {
@@ -142,9 +157,9 @@ const WebGIViewer = forwardRef((props, ref) => {
 		setPreviewMode(false);
 
 		gsap.to(position, {
-			x: 1.56,
-			y: 5.0,
-			z: 0.011,
+			x: !isMobile ? 1.56 : 9.36,
+			y: !isMobile ? 5.0 : 10.95,
+			z: !isMobile ? 0.011 : 0.09,
 			scrollTrigger: {
 				trigger: '.display-section',
 				start: 'top bottom',
@@ -158,9 +173,9 @@ const WebGIViewer = forwardRef((props, ref) => {
 			},
 		});
 		gsap.to(target, {
-			x: -0.55,
-			y: 0.32,
-			z: 0.0,
+			x: !isMobile ? -0.55 : -1.62,
+			y: !isMobile ? 0.32 : 0.02,
+			z: !isMobile ? 0.0 : -0.06,
 			scrollTrigger: {
 				trigger: '.display-section',
 				start: 'top bottom',
